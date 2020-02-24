@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+#--*-- encoding:utf-8 --*--
+
+import sys
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        sys.stderr.write('用法: ./kmx2mp4 优酷视频文件\n')
+        sys.exit(1)
+    kmx_file = sys.argv[1]
+    mp4_file = kmx_file.split('.')[0] + '.mp4'
+    out = open(mp4_file, 'wb')
+    i = open(kmx_file, 'rb')
+    i.seek(34)
+    while i:
+        c = i.read(1024 * 8)
+        if c == b'':
+            break
+        out.write(c)
